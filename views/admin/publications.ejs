@@ -1,7 +1,7 @@
 <div class="at">Publications</div>
 <div class="as">Gérer les documents et rapports</div>
 <div class="fc">
-  <form method="POST" action="/admin/publications/add">
+  <form method="POST" action="/admin/publications/add" enctype="multipart/form-data">
     <h3>Ajouter une publication</h3>
     <div class="fr">
       <div class="fg"><label>Titre</label><input type="text" name="title" placeholder="Titre de la publication" required></div>
@@ -18,8 +18,7 @@
       </div>
       <div class="fg"><label>Auteurs</label><input type="text" name="authors" placeholder="Noms des auteurs..."></div>
     </div>
-    <div class="fg"><label>Description courte</label><textarea name="description" placeholder="Description de la publication..."></textarea></div>
-    <div class="fg"><label>URL du fichier PDF</label><input type="text" name="url_pdf" placeholder="/pdf/rapport2025.pdf"></div>
+    <div class="fg"><label>Fichier PDF</label><input type="file" name="pdf_file" accept=".pdf"></div>
     <button type="submit" class="btn-p">Enregistrer</button>
   </form>
 </div>

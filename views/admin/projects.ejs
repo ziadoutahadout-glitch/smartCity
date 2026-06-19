@@ -1,7 +1,7 @@
 <div class="at">Projets</div>
 <div class="as">Gérer les projets de recherche</div>
 <div class="fc">
-  <form method="POST" action="/admin/projects/add">
+  <form method="POST" action="/admin/projects/add" enctype="multipart/form-data">
     <h3>Ajouter un projet</h3>
     <div class="fr">
       <div class="fg"><label>Titre</label><input type="text" name="title" placeholder="Titre du projet" required></div>
@@ -25,8 +25,8 @@
       <div class="fg"><label>Partenaire / Période</label><input type="text" name="partner" placeholder="ex: 2024-2026"></div>
     </div>
     <div class="fr">
-      <div class="fg"><label>Lien PDF du Projet</label><input type="text" name="pdf_url" placeholder="https://drive.google.com/..."></div>
-      <div class="fg"><label>URL Image</label><input type="text" name="image_url" placeholder="https://drive.google.com/.../img.jpg"></div>
+      <div class="fg"><label>Lien PDF du Projet</label><input type="file" name="pdf_file" accept=".pdf"></div>
+      <div class="fg"><label>URL Image</label><input type="file" name="image_file" accept="image/*"></div>
     </div>
     <button type="submit" class="btn-p">Enregistrer</button>
   </form>

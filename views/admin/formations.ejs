@@ -1,7 +1,7 @@
 <div class="at">Formations</div>
 <div class="as">Gérer le catalogue de formations</div>
 <div class="fc">
-  <form method="POST" action="/admin/formations/add">
+  <form method="POST" action="/admin/formations/add" enctype="multipart/form-data">
     <h3>Ajouter une formation</h3>
     <div class="fr">
       <div class="fg"><label>Titre</label><input type="text" name="title" placeholder="Titre de la formation" required></div>
@@ -21,7 +21,7 @@
     </div>
     <div class="fr">
       <div class="fg"><label>URL externe</label><input type="text" name="url" placeholder="https://..."></div>
-      <div class="fg"><label>URL Image</label><input type="text" name="image_url" placeholder="/img/formation1.jpg"></div>
+      <div class="fg"><label>Image (Optionnelle)</label><input type="file" name="image_file" accept="image/*"></div>
     </div>
     <button type="submit" class="btn-p">Enregistrer</button>
   </form>

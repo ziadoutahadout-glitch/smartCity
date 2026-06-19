@@ -14,16 +14,20 @@ router.post('/settings', adminController.postSettings);
 router.get('/selection', adminController.getSelection);
 router.post('/selection', adminController.postSelection);
 
-router.post('/projects/add', adminController.postAddProject);
+const multer = require('multer');
+const upload = multer({ storage: multer.memoryStorage() });
+const mixUpload = upload.fields([{ name: 'image_file', maxCount: 1 }, { name: 'pdf_file', maxCount: 1 }]);
+
+router.post('/projects/add', mixUpload, adminController.postAddProject);
 router.post('/projects/delete/:id', adminController.postDeleteProject);
 
-router.post('/events/add', adminController.postAddEvent);
+router.post('/events/add', mixUpload, adminController.postAddEvent);
 router.post('/events/delete/:id', adminController.postDeleteEvent);
 
-router.post('/publications/add', adminController.postAddPublication);
+router.post('/publications/add', mixUpload, adminController.postAddPublication);
 router.post('/publications/delete/:id', adminController.postDeletePublication);
 
-router.post('/formations/add', adminController.postAddFormation);
+router.post('/formations/add', mixUpload, adminController.postAddFormation);
 router.post('/formations/delete/:id', adminController.postDeleteFormation);
 
 module.exports = router;

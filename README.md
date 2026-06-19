@@ -103,30 +103,50 @@ Make sure you have the following installed on your machine:
 
 ## 🚀 Installation & Setup
 
-### 1. Clone the repository
+### 1. Installation en local
 
-```bash
-git clone https://github.com/iyad05-20/smartCity.git
-cd smartCity
-```
+1. Cloner le dépôt :
+   ```bash
+   git clone https://github.com/votre-user/smartCity.git
+   ```
+2. Installer les dépendances :
+   ```bash
+   npm install
+   ```
+3. Configurer les variables d'environnement (`.env`) :
+   ```env
+   PORT=3002
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASS=0000
+   DB_NAME=smartcity
+   GOOGLE_DRIVE_FOLDER_ID="VOTRE_ID_DE_DOSSIER_ICI"
+   GOOGLE_APPLICATION_CREDENTIALS="./credentials.json"
+   ```
 
-### 2. Install dependencies
+### 🔐 Configuration de l'Upload Google Drive (Important)
 
-```bash
-npm install
-```
+L'application envoie automatiquement les fichiers uploadés (images, PDF) sur Google Drive.
+Pour cela, vous devez configurer un "Compte de Service" (Service Account) Google Cloud :
 
-### 3. Configure environment variables
+**Étape 1 : Créer le Compte de Service (Le serveur)**
+1. Allez sur la [Google Cloud Console](https://console.cloud.google.com/).
+2. Créez un nouveau projet et activez l'API **"Google Drive API"**.
+3. *Attention : N'utilisez pas l'assistant de création d'identifiants (OAuth).* Ouvrez le menu de gauche (☰) > **IAM et administration** > **Comptes de service**.
+4. Cliquez sur **"+ CRÉER UN COMPTE DE SERVICE"**. Donnez-lui un nom (ex: `smartcity-upload`), cliquez sur Continuer puis Terminer.
+5. Dans la liste, vous verrez l'e-mail de ce compte (ex: `smartcity-upload@votre-projet...gserviceaccount.com`). **Copiez cette adresse e-mail**.
+6. Cliquez sur cette adresse e-mail, allez dans l'onglet **"Clés"** (Keys) > **"Ajouter une clé"** > **"Créer une clé"** au format **JSON**.
+7. Le fichier se télécharge. Placez-le à la racine de ce projet sous le nom strict de `credentials.json`.
 
-Create a `.env` file in the project root (or edit the existing one):
-
-```env
-PORT=3000
-DB_HOST=localhost
-DB_USER=root
-DB_PASS=your_mysql_password
-DB_NAME=smartcity
-```
+**Étape 2 : Configurer le Dossier de Réception (Votre Drive)**
+1. Allez sur votre Google Drive personnel (dans votre navigateur).
+2. Créez un nouveau dossier (ex: "Uploads SmartCity").
+3. Faites un clic-droit sur ce dossier > **Partager**.
+4. Collez l'adresse e-mail de votre compte de service (copiée à l'étape 1.5) et donnez-lui le rôle **"Éditeur"**. Décochez "Envoyer une notification" et validez.
+5. Double-cliquez pour ouvrir ce dossier. Regardez la barre d'adresse (URL) de votre navigateur.
+   - Exemple : `https://drive.google.com/drive/folders/1A2b3C4d5E6f7G8h9I0jK-LMNOPqrstU`
+6. La longue série de caractères à la fin de l'URL est votre ID de dossier.
+7. Copiez cet ID et collez-le dans votre fichier `.env` à la ligne `GOOGLE_DRIVE_FOLDER_ID="VOTRE_ID_ICI"`.
 
 > ⚠️ Replace `your_mysql_password` with your actual MySQL root password.
 

@@ -1,7 +1,7 @@
 <div class="at">Événements</div>
 <div class="as">Gérer les événements du site</div>
 <div class="fc">
-  <form method="POST" action="/admin/events/add">
+  <form method="POST" action="/admin/events/add" enctype="multipart/form-data">
     <h3>Ajouter un événement</h3>
     <div class="fr">
       <div class="fg"><label>Titre</label><input type="text" name="title" placeholder="Titre" required></div>
@@ -26,9 +26,9 @@
           <option value="Séminaire">Séminaire</option>
         </select>
       </div>
-      <div class="fg"><label>Photo (URL)</label><input type="text" name="image_url" placeholder="https://..."></div>
+      <div class="fg"><label>Image de l'événement</label><input type="file" name="image_file" accept="image/*"></div>
     </div>
-    <div class="fg"><label>URL externe</label><input type="text" name="url" placeholder="https://..."></div>
+    <div class="fg"><label>URL externe (facultatif)</label><input type="text" name="url" placeholder="https://..."></div>
     <button type="submit" class="btn-p">Enregistrer</button>
   </form>
 </div>
