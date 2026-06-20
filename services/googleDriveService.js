@@ -3,10 +3,25 @@ const stream = require('stream');
 require('dotenv').config();
 
 // Configuration de l'authentification Google
-const auth = new google.auth.GoogleAuth({
-    keyFile: process.env.GOOGLE_APPLICATION_CREDENTIALS,
-    scopes: ['https://www.googleapis.com/auth/drive.file']
-});
+let auth;
+
+// Si on est sur Vercel/Railway, on utilise la variable d'environnement contenant le JSON brut
+if (process.env.GOOGLE_CREDENTIALS_JSON) {
+    const keys = JSON.parse(process.env.GOOGLE_CREDENTIALS_JSON);
+    auth = new google.auth.GoogleAuth({
+        credentials: {
+            client_email: keys.client_email,
+            private_key: keys.private_key,
+        },
+        scopes: ['https://www.googleapis.com/auth/drive.file']
+    });
+} else {
+    // Si on est en local, on lit le fichier
+    auth = new google.auth.GoogleAuth({
+        keyFile: process.env.GOOGLE_APPLICATION_CREDENTIALS || './credentials.json',
+        scopes: ['https://www.googleapis.com/auth/drive.file']
+    });
+}
 
 const drive = google.drive({ version: 'v3', auth });
 
@@ -16,8 +31,11 @@ const drive = google.drive({ version: 'v3', auth });
  * @returns {Promise<string>} - L'URL publique de visualisation (webViewLink)
  */
 async function uploadToDrive(file) {
-    if (!process.env.GOOGLE_APPLICATION_CREDENTIALS || !process.env.GOOGLE_DRIVE_FOLDER_ID) {
+    if (!process.env.GOOGLE_CREDENTIALS_JSON && !process.env.GOOGLE_APPLICATION_CREDENTIALS) {
         throw new Error("Configuration Google Drive manquante dans le fichier .env");
+    }
+    if (!process.env.GOOGLE_DRIVE_FOLDER_ID) {
+        throw new Error("ID du dossier Google Drive manquant");
     }
 
     try {
