@@ -1,18 +1,45 @@
 // PRELOADER — only on initial load
 window.addEventListener('load', () => { setTimeout(() => { document.getElementById('pl')?.classList.add('out') }, 1800) });
 
-// SCROLL PROGRESS
+// SCROLL PROGRESS + NAV HIDE/SHOW
 const spb = document.getElementById('spb');
-if (spb) {
+const navEl = document.querySelector('nav');
+let lastScrollY = 0;
+let scrollThreshold = 80; // don't hide until user has scrolled past this
+if (spb || navEl) {
     window.addEventListener('scroll', () => {
-        const h = document.documentElement;
-        const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
-        spb.style.width = (isNaN(pct) ? 0 : pct) + '%';
+        const currentY = window.scrollY;
+        // Scroll progress bar
+        if (spb) {
+            const h = document.documentElement;
+            const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+            spb.style.width = (isNaN(pct) ? 0 : pct) + '%';
+        }
+        // Nav hide/show on scroll direction
+        if (navEl) {
+            if (currentY > lastScrollY && currentY > scrollThreshold) {
+                // Scrolling DOWN past threshold → hide
+                navEl.classList.add('nav-hidden');
+            } else {
+                // Scrolling UP → show
+                navEl.classList.remove('nav-hidden');
+            }
+            lastScrollY = currentY;
+        }
     }, { passive: true });
 }
 
 // LANG
-function setLang(el) { document.querySelectorAll('.lb').forEach(b => b.classList.remove('on')); el.classList.add('on') }
+function setLang(el, langCode) { 
+    document.querySelectorAll('.lb').forEach(b => b.classList.remove('on')); 
+    el.classList.add('on'); 
+    
+    const selectField = document.querySelector(".goog-te-combo");
+    if (selectField) {
+        selectField.value = langCode;
+        selectField.dispatchEvent(new Event('change'));
+    }
+}
 
 // REVEAL — exposed globally so router.js can call it
 function checkRv() {
