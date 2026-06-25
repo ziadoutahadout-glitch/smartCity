@@ -3,12 +3,26 @@
   .axe-desc ul { padding-left: 1.5rem; margin-top: 10px; margin-bottom: 15px; color: var(--gy); list-style-type: disc; font-size: 14.5px; }
   .axe-desc li { margin-bottom: 8px; line-height: 1.7; }
 </style>
+<%
+  const iconMap = {
+    1: 'M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm0 3.7c1.82 0 3.3 1.48 3.3 3.3 0 1.5-1.01 2.77-2.4 3.19v1.81h-1.8v-1.81c-1.39-.42-2.4-1.69-2.4-3.19 0-1.82 1.48-3.3 3.3-3.3z', // Gouvernance
+    2: 'M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z', // Mobilité
+    3: 'M11.5 2v9h6L10.5 22v-9h-6z', // Énergie et Environnement
+    4: 'M5 9.2L10.5 14.7L15 10.2L22 17.2V14H24V20H18V18H20.6L15 12.4L10.5 16.9L3.6 10L5 9.2ZM2 2H4V22H2V2z', // Économie & Gestion
+    5: 'M12 7V3H2v18h20V7H12zm-2 12H4v-2h6v2zm0-4H4v-2h6v2zm0-4H4V9h6v2zm0-4H4V5h6v2zm10 12h-8v-2h8v2zm0-4h-8v-2h8v2zm0-4h-8V9h8v2z', // Habitat & Urbanisme
+    6: 'M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z', // Citoyen & Inclusion
+    7: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z', // Santé
+    8: 'M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 15l-3-3 1.41-1.41L11 13.17l4.59-4.59L17 10l-6 6z', // Sûreté
+    9: 'M22 22H2V2l10 6V4l10 6v12zM10 9.5L4 6v14h6V9.5zm10 3.5l-6-3.6V20h6V13z', // Industrie
+    10: 'M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z' // Technologies & Données
+  };
+%>
 <div style="padding:60px 1.5rem;min-height:calc(100vh - 200px);background:var(--cr)"><div style="max-width:1200px;margin:0 auto">
   <% if (axes && axes.length > 0) { %>
     <% axes.forEach((axe, index) => { %>
       <div class="axe-row rv">
         <div class="axe-rl <%= index % 2 === 0 ? 'odd' : 'even' %>">
-          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="<%= iconMap[axe.ordre] || 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z' %>"/></svg>
           <h2><%= axe.ordre === 10 ? 'Transversal' : 'Axe ' + axe.ordre %></h2>
           <h3><%= axe.nom_fr %></h3>
         </div>
