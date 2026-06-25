@@ -9,6 +9,7 @@ const ProjectRepository = require('../repositories/ProjectRepository');
 const EventRepository = require('../repositories/EventRepository');
 const PublicationRepository = require('../repositories/PublicationRepository');
 const FormationRepository = require('../repositories/FormationRepository');
+const SiteCounterRepository = require('../repositories/SiteCounterRepository');
 
 exports.getDashboard = async (req, res) => {
     res.render('admin/dashboard', {
@@ -59,12 +60,21 @@ exports.getFormations = async (req, res) => {
     });
 };
 
-exports.getChiffres = (req, res) => {
+exports.getChiffres = async (req, res) => {
+    const chiffres = loadData('chiffres.json');
+    const nbrChercheurs = await SiteCounterRepository.getCounter('nbr_chercheurs');
+    const projects = await ProjectRepository.findAll();
+    const events = await EventRepository.findAll();
+    
+    if (chiffres.membres) chiffres.membres.value = nbrChercheurs;
+    if (chiffres.projets) chiffres.projets.value = projects.length;
+    if (chiffres.evenements) chiffres.evenements.value = events.length;
+
     res.render('admin/chiffres', {
         layout: 'layouts/admin',
         title: 'Gérer les chiffres clés',
         currentPage: 'chiffres',
-        chiffres: loadData('chiffres.json')
+        chiffres: chiffres
     });
 };
 

@@ -1,15 +1,32 @@
 <div class="ph"><div class="ph-in"><div class="hbadge">Ressources</div><h1 style="font-size:clamp(24px,3vw,42px);font-weight:700;color:white;margin-top:12px">Publications</h1></div></div>
+<% 
+  // Extract unique years and sort them descending
+  const years = [...new Set(publications.map(p => p.year))].sort((a, b) => b - a);
+%>
 <div style="padding:48px 1.5rem;min-height:calc(100vh - 200px);background:var(--cr)"><div style="max-width:1200px;margin:0 auto">
-  <div class="yf"><button class="yb on">Toutes</button><button class="yb">2025</button><button class="yb">2024</button><button class="yb">2023</button></div>
+  <div class="yf">
+    <button class="yb on" data-year="all">Toutes</button>
+    <% years.forEach(year => { %>
+      <button class="yb" data-year="<%= year %>"><%= year %></button>
+    <% }) %>
+  </div>
   <div class="pub-list">
     <% publications.forEach(p => { %>
-      <div class="pub-it">
+      <div class="pub-it" data-year="<%= p.year %>">
         <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6z"/></svg>
         <div>
           <h3><%= p.title %></h3>
           <p><%= p.year %> · <%= p.type %> · <%= p.category %><% if(p.authors) { %> · <%= p.authors %><% } %></p>
         </div>
-        <div class="pub-dl"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></div>
+        <% if (p.url_pdf) { %>
+          <a href="<%= p.url_pdf %>" target="_blank" class="pub-dl" download title="Télécharger le document">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          </a>
+        <% } else { %>
+          <div class="pub-dl" style="opacity: 0.25; cursor: not-allowed;" title="Document non disponible">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          </div>
+        <% } %>
       </div>
     <% }) %>
   </div>

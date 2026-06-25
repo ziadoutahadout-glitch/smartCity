@@ -116,6 +116,12 @@ exports.getHome = async (req, res) => {
     if (chiffres.membres) {
         chiffres.membres.value = nbrChercheurs;
     }
+    if (chiffres.projets) {
+        chiffres.projets.value = projects.length;
+    }
+    if (chiffres.evenements) {
+        chiffres.evenements.value = events.length;
+    }
 
     renderPage(req, res, 'public/home', {
         title: 'Accueil - Centre Smart City',

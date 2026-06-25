@@ -70,14 +70,6 @@
             setTimeout(checkRv, 50);
         }
 
-        // Re-init filter buttons
-        contentEl.querySelectorAll('.yb').forEach(b => {
-            b.onclick = function () {
-                this.closest('.yf')?.querySelectorAll('.yb').forEach(x => x.classList.remove('on'));
-                this.classList.add('on');
-            };
-        });
-
         // Re-init count-up if chiffres section exists
         if (typeof resetCount === 'function') resetCount();
         const chSec = contentEl.querySelector('.chiffres-fs');

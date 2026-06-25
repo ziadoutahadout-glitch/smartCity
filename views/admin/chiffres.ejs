@@ -5,8 +5,8 @@
   <div class="chac">
     <div class="chib"><svg viewBox="0 0 24 24"><path d="<%= chiffres.membres.icon %>"/></svg></div>
     <div style="flex:1">
-      <div style="font-size:14px;font-weight:700;color:var(--dk)"><%= chiffres.membres.label %></div>
-      <input type="number" name="membresValue" value="<%= chiffres.membres.value %>" style="width:80px;border:1px solid var(--bd);border-radius:4px;padding:4px 8px;margin-top:5px;font-family:inherit">
+      <div style="font-size:14px;font-weight:700;color:var(--dk)"><%= chiffres.membres.label %> <span style="font-size:11px;font-weight:normal;color:var(--gy);margin-left:5px">(Calculé automatiquement)</span></div>
+      <input type="number" name="membresValue" value="<%= chiffres.membres.value %>" readonly style="width:80px;border:1px solid var(--bd);border-radius:4px;padding:4px 8px;margin-top:5px;font-family:inherit;background-color:#f5f5f5;color:#888;cursor:not-allowed">
     </div>
     <input type="hidden" name="membresActive" id="membresActive" value="<%= chiffres.membres.active ? 'true' : 'false' %>">
     <button type="button" class="tgl <%= chiffres.membres.active ? 'on' : '' %>" onclick="this.classList.toggle('on'); document.getElementById('membresActive').value = this.classList.contains('on') ? 'true' : 'false'"></button>
@@ -14,8 +14,8 @@
   <div class="chac">
     <div class="chib"><svg viewBox="0 0 24 24"><path d="<%= chiffres.projets.icon %>"/></svg></div>
     <div style="flex:1">
-      <div style="font-size:14px;font-weight:700;color:var(--dk)"><%= chiffres.projets.label %></div>
-      <input type="number" name="projetsValue" value="<%= chiffres.projets.value %>" style="width:80px;border:1px solid var(--bd);border-radius:4px;padding:4px 8px;margin-top:5px;font-family:inherit">
+      <div style="font-size:14px;font-weight:700;color:var(--dk)"><%= chiffres.projets.label %> <span style="font-size:11px;font-weight:normal;color:var(--gy);margin-left:5px">(Calculé automatiquement)</span></div>
+      <input type="number" name="projetsValue" value="<%= chiffres.projets.value %>" readonly style="width:80px;border:1px solid var(--bd);border-radius:4px;padding:4px 8px;margin-top:5px;font-family:inherit;background-color:#f5f5f5;color:#888;cursor:not-allowed">
     </div>
     <input type="hidden" name="projetsActive" id="projetsActive" value="<%= chiffres.projets.active ? 'true' : 'false' %>">
     <button type="button" class="tgl <%= chiffres.projets.active ? 'on' : '' %>" onclick="this.classList.toggle('on'); document.getElementById('projetsActive').value = this.classList.contains('on') ? 'true' : 'false'"></button>
@@ -23,8 +23,8 @@
   <div class="chac">
     <div class="chib"><svg viewBox="0 0 24 24"><path d="<%= chiffres.evenements.icon %>"/></svg></div>
     <div style="flex:1">
-      <div style="font-size:14px;font-weight:700;color:var(--dk)"><%= chiffres.evenements.label %></div>
-      <input type="number" name="evenementsValue" value="<%= chiffres.evenements.value %>" style="width:80px;border:1px solid var(--bd);border-radius:4px;padding:4px 8px;margin-top:5px;font-family:inherit">
+      <div style="font-size:14px;font-weight:700;color:var(--dk)"><%= chiffres.evenements.label %> <span style="font-size:11px;font-weight:normal;color:var(--gy);margin-left:5px">(Calculé automatiquement)</span></div>
+      <input type="number" name="evenementsValue" value="<%= chiffres.evenements.value %>" readonly style="width:80px;border:1px solid var(--bd);border-radius:4px;padding:4px 8px;margin-top:5px;font-family:inherit;background-color:#f5f5f5;color:#888;cursor:not-allowed">
     </div>
     <input type="hidden" name="evenementsActive" id="evenementsActive" value="<%= chiffres.evenements.active ? 'true' : 'false' %>">
     <button type="button" class="tgl <%= chiffres.evenements.active ? 'on' : '' %>" onclick="this.classList.toggle('on'); document.getElementById('evenementsActive').value = this.classList.contains('on') ? 'true' : 'false'"></button>

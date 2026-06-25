@@ -74,3 +74,28 @@ const chiffresSection = document.querySelector('.chiffres-fs');
 if (chiffresSection) {
     new IntersectionObserver(e => { if (e[0].isIntersecting) startCount() }, { threshold: .3 }).observe(chiffresSection);
 }
+
+// FILTERS (Publications)
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.yb');
+    if (!btn) return;
+    
+    const container = btn.closest('.yf');
+    if (!container) return;
+    
+    container.querySelectorAll('.yb').forEach(x => x.classList.remove('on'));
+    btn.classList.add('on');
+    
+    const targetYear = btn.getAttribute('data-year');
+    if (!targetYear) return;
+    
+    const items = document.querySelectorAll('.pub-it');
+    items.forEach(item => {
+        const itemYear = item.getAttribute('data-year');
+        if (targetYear === 'all' || itemYear === targetYear) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+});
